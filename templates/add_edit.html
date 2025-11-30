@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post" class="form">
+  <label>Date
+    <input type="date" name="date" value="{{ expense['date'] if expense else '' }}" required>
+  </label>
+
+  <label>Category
+    <select name="category">
+      {% for c in categories %}
+      <option value="{{c}}" {% if expense and expense['category']==c %}selected{% endif %}>{{c}}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>Amount
+    <input type="number" step="0.01" name="amount" value="{{ expense['amount'] if expense else '' }}" required>
+  </label>
+
+  <label>Description
+    <input type="text" name="description" value="{{ expense['description'] if expense else '' }}">
+  </label>
+
+  <button type="submit">Save</button>
+</form>
+{% endblock %}
